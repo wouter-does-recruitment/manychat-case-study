@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study · Senior Recruiter Engineering · Wouter Jaarsma</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #F5F4EF;
+  --white:     #FFFFFF;
+  --black:     #0D0D0D;
+  --ink:       #1A1A1A;
+  --lime:      #C8F135;
+  --orange:    #FF5C35;
+  --blue:      #3557FF;
+  --purple:    #9747FF;
+  --grey-100:  #F0EFE9;
+  --grey-200:  #E2E1DA;
+  --grey-300:  #C8C7BF;
+  --grey-500:  #8A8980;
+  --grey-700:  #4A4A44;
+  --display:   'Instrument Serif', Georgia, serif;
+  --body:      'DM Sans', system-ui, sans-serif;
+  --mono:      'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ── */
+header {
+  background: var(--black);
+  padding: 0 2.5rem;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  color: var(--white);
+}
+.logo em { font-style: italic; color: var(--lime); }
+
+.header-r {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pill {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+}
+.pill-lime   { background: var(--lime); color: var(--black); }
+.pill-ghost  { border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.5); }
+
+/* ── HERO ── */
+.hero {
+  background: var(--black);
+  padding: 3.5rem 2.5rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  right: -60px; top: -60px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,241,53,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--lime);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 18px; height: 1px;
+  background: var(--lime);
+}
+.hero h1 {
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+.hero h1 em { font-style: italic; color: var(--lime); }
+.hero-sub {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* ── NAV ── */
+.nav-wrap {
+  background: var(--white);
+  border-bottom: 1.5px solid var(--grey-200);
+  padding: 0 2.5rem;
+  position: sticky;
+  top: 58px;
+  z-index: 90;
+}
+.nav {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+}
+.nav-item {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--grey-500);
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1.5px;
+  white-space: nowrap;
+  transition: all 0.15s;
+  user-select: none;
+}
+.nav-item:hover { color: var(--ink); }
+.nav-item.active { color: var(--ink); border-bottom-color: var(--black); }
+
+/* ── MAIN ── */
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3rem 2.5rem;
+}
+.section { display: none; }
+.section.active { display: block; animation: fadeIn 0.2s ease both; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── CONTENT BLOCKS ── */
+.task-intro {
+  background: var(--white);
+  border: 1.5px solid var(--grey-200);
+  border-left: 3px solid var(--lime);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+  font-size: 0.8rem;
+  color: var(--grey-700);
+  font-family: var(--mono);
+}
+
+.block { margin-bottom: 2.5rem; }
+
+.block-title {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+.block-title em { font-style: italic; color: var(--grey-500); }
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--lime);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 12px; height: 1px;
+  background: var(--lime);
+}
+
+p {
+  color: var(--grey-700);
+  margin-bottom: 0.9rem;
+  line-height: 1.65;
+}
+
+p strong { color: var(--ink); font-weight: 600; }
+
+.sub-head {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--ink);
+  margin: 1.5rem 0 0.5rem;
+}
+
+ul {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+ul li {
+  padding: 0.35rem 0 0.35rem 1.25rem;
+  position: relative;
+  color: var(--grey-700);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--lime);
+  font-size: 0.75rem;
+  top: 0.45rem;
+}
+
+ul li strong { color: var(--ink); }
+
+/* ── TABLES ── */
+.table-wrap {
+  background: var(--white);
+  border: 1.5px solid var(--grey-200);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 1.25rem 0 1.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+thead th {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.65rem 1rem;
+  text-align: left;
+}
+
+tbody tr { border-bottom: 1px solid var(--grey-100); }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover td { background: var(--grey-100); }
+
+tbody td {
+  padding: 0.75rem 1rem;
+  color: var(--grey-700);
+  vertical-align: middle;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+}
+.tag-ok      { background: rgba(200,241,53,0.2);  color: #5a7000; }
+.tag-warn    { background: rgba(255,92,53,0.1);   color: var(--orange); }
+.tag-crit    { background: rgba(255,92,53,0.15);  color: #cc2200; }
+
+/* ── INSIGHT CARDS ── */
+.insights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0 1.5rem;
+}
+
+.insight-card {
+  background: var(--white);
+  border: 1.5px solid var(--grey-200);
+  border-radius: 6px;
+  padding: 1.25rem;
+}
+
+.insight-num {
+  font-family: var(--display);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--lime);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.insight-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.insight-body {
+  font-size: 0.78rem;
+  color: var(--grey-500);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── ACTION CARDS ── */
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+
+.action-card {
+  background: var(--white);
+  border: 1.5px solid var(--grey-200);
+  border-radius: 6px;
+  padding: 1.25rem;
+}
+
+.action-label {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  display: inline-block;
+}
+.action-label.quick { background: rgba(200,241,53,0.2); color: #5a7000; }
+.action-label.long  { background: rgba(53,87,255,0.08); color: var(--blue); }
+
+/* ── METRICS ROW ── */
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1px;
+  background: var(--grey-200);
+  border: 1.5px solid var(--grey-200);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 1.25rem 0;
+}
+
+.metric-cell {
+  background: var(--white);
+  padding: 1rem 1.25rem;
+}
+
+.metric-val {
+  font-family: var(--display);
+  font-size: 1.8rem;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.metric-val.green  { color: #22a861; }
+.metric-val.orange { color: var(--orange); }
+
+.metric-lbl {
+  font-size: 0.68rem;
+  color: var(--grey-500);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 500;
+}
+
+/* ── HM CARDS ── */
+.hm-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin: 1.25rem 0;
+}
+
+.hm-card {
+  background: var(--white);
+  border: 1.5px solid var(--grey-200);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.hm-head {
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--grey-100);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hm-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--ink);
+}
+
+.hm-issue {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+}
+
+.hm-issue.shift   { background: rgba(255,92,53,0.1);  color: var(--orange); }
+.hm-issue.silent  { background: rgba(53,87,255,0.08); color: var(--blue); }
+
+.hm-body { padding: 1rem 1.25rem; }
+.hm-body p { font-size: 0.82rem; margin-bottom: 0.65rem; }
+.hm-body p:last-child { margin-bottom: 0; }
+
+.hm-outcome {
+  background: var(--grey-100);
+  border-top: 1px solid var(--grey-200);
+  padding: 0.65rem 1.25rem;
+  font-size: 0.75rem;
+  color: var(--grey-700);
+}
+.hm-outcome strong { color: var(--ink); }
+
+/* ── CHANNEL BARS ── */
+.channels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+
+.ch-card {
+  background: var(--white);
+  border: 1.5px solid var(--grey-200);
+  border-radius: 6px;
+  padding: 1.1rem 1.25rem;
+}
+
+.ch-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.ch-name {
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--ink);
+}
+
+.ch-pct {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.ch-bar-bg {
+  height: 5px;
+  background: var(--grey-100);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.ch-bar { height: 100%; border-radius: 3px; }
+
+.ch-note {
+  font-size: 0.7rem;
+  color: var(--grey-500);
+}
+
+/* ── STANDOUT IDEAS ── */
+.ideas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin: 1.25rem 0;
+}
+
+.idea-card {
+  background: var(--white);
+  border: 1.5px solid var(--grey-200);
+  border-radius: 6px;
+  padding: 1.25rem;
+}
+
+.idea-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.idea-title {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.idea-body {
+  font-size: 0.78rem;
+  color: var(--grey-500);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ── QUOTE ── */
+.quote-block {
+  border-left: 3px solid var(--lime);
+  padding: 0.75rem 1.25rem;
+  margin: 1.25rem 0;
+  background: var(--white);
+  border-radius: 0 6px 6px 0;
+}
+
+.quote-block p {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  header { padding: 0 1rem; height: auto; min-height: 52px; flex-wrap: wrap; gap: 0.4rem; padding-top: 0.5rem; padding-bottom: 0.5rem; }
+  .hero { padding: 2rem 1rem 1.75rem; }
+  .hero h1 { font-size: 1.75rem; }
+  .nav-wrap { padding: 0; }
+  .nav { padding: 0 1rem; min-width: max-content; overflow-x: auto; }
+  .nav-item { font-size: 0.75rem; padding: 0.75rem 0.85rem; }
+  main { padding: 1.5rem 1rem; }
+
+  /* grids → single column */
+  .actions  { grid-template-columns: 1fr; }
+  .hm-grid  { grid-template-columns: 1fr; }
+  .ideas    { grid-template-columns: 1fr; }
+  .insights { grid-template-columns: 1fr; }
+  .channels { grid-template-columns: 1fr 1fr; }
+
+  /* tables → scrollable */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { min-width: 480px; }
+
+  /* metrics row → 2 cols */
+  .metrics-row { grid-template-columns: repeat(2, 1fr); }
+
+  .block-title { font-size: 1.25rem; }
+  footer { padding: 1rem; flex-direction: column; gap: 0.4rem; text-align: center; }
+  .footer-r { display: none; }
+}
+
+@media (max-width: 420px) {
+  .channels { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 1.5rem; }
+  .pill { font-size: 0.55rem; }
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1.5px solid var(--grey-200);
+  padding: 1.25rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--white);
+  margin-top: 3rem;
+}
+.footer-l { font-size: 0.75rem; color: var(--grey-500); }
+.footer-l strong { color: var(--ink); }
+.footer-r { font-family: var(--mono); font-size: 0.6rem; color: var(--grey-300); text-transform: uppercase; letter-spacing: 0.07em; }
+
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">many<em>chat</em></div>
+  <div class="header-r">
+    <span class="pill pill-ghost">Case Study</span>
+    <span class="pill pill-lime">Senior Recruiter Engineering</span>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Case Study · April 2026</div>
+    <h1>Three tasks.<br><em>One recruiter.</em></h1>
+    <div class="hero-sub">
+      <span>Wouter Jaarsma</span>
+      <span>·</span>
+      <span>Does Recruitment</span>
+      <span>·</span>
+      <span>Barcelona</span>
+    </div>
+  </div>
+</div>
+
+<div class="nav-wrap">
+  <div class="nav">
+    <div class="nav-item active" onclick="showTab('t1',this)">Task 1 — Funnel Analysis</div>
+    <div class="nav-item" onclick="showTab('t2',this)">Task 2 — Ground Keeps Moving</div>
+    <div class="nav-item" onclick="showTab('t3',this)">Task 3 — Candidate Attraction</div>
+  </div>
+</div>
+
+<main>
+
+<!-- ══════════════ TASK 1 ══════════════ -->
+<div id="t1" class="section active">
+
+  <div class="task-intro">📊 Funnel Analysis & Insights — Backend Engineering · Last quarter</div>
+
+  <!-- Diagnosis -->
+  <div class="block">
+    <div class="section-label">01 — Process health</div>
+    <div class="block-title">What the data <em>actually</em> says</div>
+
+    <p>Two metrics are healthy on the surface. Two are not.</p>
+
+    <div class="metrics-row">
+      <div class="metric-cell">
+        <div class="metric-val green">45d</div>
+        <div class="metric-lbl">Time-to-hire ✓</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-val green">72d</div>
+        <div class="metric-lbl">Time-to-fill ✓</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-val orange">12d</div>
+        <div class="metric-lbl">To 1st HM interview ⚠</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-val orange">65%</div>
+        <div class="metric-lbl">Candidate satisfaction ⚠</div>
+      </div>
+    </div>
+
+    <p><strong>Time-to-hire (45 days)</strong> sits within the ~6-week industry benchmark. <strong>Time-to-fill (72 days)</strong> is acceptable once you factor in an average 4-week notice period — the role is effectively live 10 weeks after offer acceptance, which is realistic for senior engineers.</p>
+
+    <p><strong>12 days to first HM interview is too long.</strong> Senior engineers are in multiple processes at once. Every day you wait, another company moves faster. This is where you lose people before the funnel has really started.</p>
+
+    <p><strong>65% candidate satisfaction is a brand problem, not just a process problem.</strong> Engineers talk. A poor experience doesn't stay private — it ends up on Glassdoor, in Slack groups, in hallway conversations at meetups.</p>
+  </div>
+
+  <!-- Funnel -->
+  <div class="block">
+    <div class="section-label">02 — Funnel breakdown</div>
+    <div class="block-title">Where the <em>real bleeding</em> is</div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Stage</th>
+            <th>Candidates</th>
+            <th>% to next</th>
+            <th>Time (days)</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Top of funnel</td><td>400</td><td>25%</td><td>12</td><td><span class="tag tag-ok">Healthy</span></td></tr>
+          <tr><td>Recruiter Screen</td><td>100</td><td>40%</td><td>7</td><td><span class="tag tag-warn">Too low</span></td></tr>
+          <tr><td>HM Interview</td><td>40</td><td>50%</td><td>9</td><td><span class="tag tag-warn">Misaligned</span></td></tr>
+          <tr><td>Technical Interview</td><td>20</td><td>25%</td><td>5</td><td><span class="tag tag-crit">Critical</span></td></tr>
+          <tr><td>Final Interview</td><td>5</td><td>80%</td><td>6</td><td><span class="tag tag-ok">Healthy</span></td></tr>
+          <tr><td>Offer</td><td>4</td><td>75%</td><td>6</td><td><span class="tag tag-ok">Healthy</span></td></tr>
+          <tr><td>Offer Accepted</td><td>3</td><td>—</td><td>—</td><td><span class="tag tag-ok">Healthy</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>The final stages are solid — candidates who make it to the end are good and they accept. The problem is everything before that.</p>
+
+    <ul>
+      <li><strong>Recruiter Screen → HM (40%):</strong> Only 40 out of 100 screened candidates advance. That means the recruiter is letting through profiles the HM doesn't want. Classic misalignment at intake — dealbreakers weren't clearly defined, or they only surfaced during the call.</li>
+      <li><strong>HM Interview → Technical (50%):</strong> The hiring manager is spending time on 40 interviews and rejecting half. That's expensive. The same root cause: the bar going in wasn't sharp enough.</li>
+      <li><strong>Technical Interview → Final (25%):</strong> This is the loudest alarm. If 75% fail here, technical fit is being tested way too late. Basic technical screening should happen at recruiter screen level — not as a full assessment, but enough to disqualify obvious mismatches early.</li>
+    </ul>
+  </div>
+
+  <!-- Insights -->
+  <div class="block">
+    <div class="section-label">03 — Key insights</div>
+    <div class="block-title">Three things that <em>explain it all</em></div>
+
+    <div class="insights">
+      <div class="insight-card">
+        <div class="insight-num">01</div>
+        <div class="insight-title">Recruiter ↔ HM misalignment</div>
+        <p class="insight-body">Low conversion at both recruiter screen and HM interview point to the same root cause: no shared definition of what good looks like. Fix it at intake, not mid-search.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-num">02</div>
+        <div class="insight-title">Technical screening too late</div>
+        <p class="insight-body">25% pass rate at technical round means unqualified candidates are burning everyone's time for three stages before getting caught. Move the check earlier.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-num">03</div>
+        <div class="insight-title">Slow momentum = poor experience</div>
+        <p class="insight-body">The 12-day wait and 65% satisfaction score are connected. Candidates feel ignored. In a competitive market, that feeling drives them to whoever responds faster.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="block">
+    <div class="section-label">04 — Recommendations</div>
+    <div class="block-title">What to <em>do about it</em></div>
+
+    <div class="actions">
+      <div class="action-card">
+        <div class="action-label quick">Quick wins</div>
+        <ul>
+          <li>Cut time-to-first HM interview to <strong>≤5 days</strong> — block a recurring weekly slot</li>
+          <li>Build a structured <strong>intake checklist</strong> with must-haves, dealbreakers, and level criteria. Review after every 5–10 screens.</li>
+          <li>Add <strong>2–3 technical questions</strong> to the recruiter screen — not a full assessment, just enough to catch obvious mismatches early</li>
+          <li><strong>Personal rejection calls</strong> for every candidate who reached recruiter screen or beyond — 5 minutes, honest feedback, followed by a written email with the same message. We did this at FLYR and it made a measurable difference. Candidates remember how you treated them when it didn't work out.</li>
+        </ul>
+      </div>
+      <div class="action-card">
+        <div class="action-label long">Longer term</div>
+        <ul>
+          <li>Implement a <strong>structured pre-screen</strong> before the HM interview — async or standardised, validated with engineering</li>
+          <li>Run <strong>candidate experience interviews</strong> — understand why satisfaction is at 65% and fix the specific moments that hurt</li>
+          <li>Bi-weekly <strong>recruiter/HM calibration sessions</strong> — review recent screens together, align on what passed and why</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      <p>"Every candidate who made it to recruiter screen or further gets a personal call — 5 minutes, real feedback, then a follow-up email. It's a small investment with a big return on employer brand."</p>
+    </div>
+  </div>
+
+  <!-- Metrics -->
+  <div class="block">
+    <div class="section-label">05 — Measuring success</div>
+    <div class="block-title">How we <em>know it's working</em></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th>Current</th><th>Target</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Time-to-first HM interview</td><td>12 days</td><td>≤5 days</td></tr>
+          <tr><td>Recruiter screen → HM conversion</td><td>40%</td><td>≥60%</td></tr>
+          <tr><td>HM → Technical conversion</td><td>50%</td><td>≥65%</td></tr>
+          <tr><td>Technical pass rate</td><td>25%</td><td>≥50%</td></tr>
+          <tr><td>Candidate satisfaction</td><td>65%</td><td>≥80%</td></tr>
+          <tr><td>Rejection call completion rate</td><td>—</td><td>100% for screen + beyond</td></tr>
+          <tr><td>Time-to-hire</td><td>45 days</td><td>Maintain ≤45 days</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ TASK 2 ══════════════ -->
+<div id="t2" class="section">
+
+  <div class="task-intro">📋 When the Ground Keeps Moving — Two difficult HMs + a VP update</div>
+
+  <!-- Real example -->
+  <div class="block">
+    <div class="section-label">01 — Real example</div>
+    <div class="block-title">When the <em>budget moved</em> mid-search</div>
+
+    <p>At FLYR, I was four weeks into sourcing a Senior Backend Engineer in Barcelona. Clear intake, strong pipeline, candidates in multiple interview stages. Then the salary dropped — from €70–75K to a max of €58K. The HM still wanted 7+ years of experience. The role had effectively become a mid-level position with a senior requirement.</p>
+
+    <p>First step: understand why. Budget constraints. The HM also genuinely believed €58K was market rate for senior engineers in Barcelona. It isn't.</p>
+
+    <p>I shared my concern directly — we had strong profiles who would likely disengage at this number. But staying positive is a choice. I didn't get stuck on what changed. I reviewed the top candidates with the HM and personally reached out to gauge appetite. Several stayed in — they saw the bigger picture at FLYR, the growth potential, what the role could mean for their career.</p>
+
+    <div class="quote-block">
+      <p>"We take the setbacks and look for what is possible — without losing too much time."</p>
+    </div>
+
+    <p><strong>What I learned:</strong> Always validate salary budget with additional stakeholders — finance, direct manager — early. HMs are not always close to the numbers. I also started anchoring candidate salary expectations slightly below our stated maximum during recruiter screens. Buffer for exactly this kind of situation.</p>
+  </div>
+
+  <!-- Two HMs -->
+  <div class="block">
+    <div class="section-label">02 — The two conversations</div>
+    <div class="block-title">Different problems. <em>Different approach.</em></div>
+
+    <div class="hm-grid">
+      <div class="hm-card">
+        <div class="hm-head">
+          <div class="hm-name">Hiring Manager 1</div>
+          <div class="hm-issue shift">Shifting requirements</div>
+        </div>
+        <div class="hm-body">
+          <p>The irrelevant pipeline is something I can handle on my side. What I make very clear is that <strong>this is also his problem</strong>. He just lost three weeks. His deadline has slipped. His team is still understaffed. The pressure to explain the delay is now on him.</p>
+          <p>I make that cause-and-effect explicit — not as blame, but as business reality. Once that lands, we move to solution mode. No more verbal realignment mid-search.</p>
+          <p>The outcome I'm driving toward: a <strong>locked, written role brief</strong> we both sign off on. Level, must-haves, dealbreakers, what good looks like at each stage. Then we start again — fast.</p>
+        </div>
+        <div class="hm-outcome"><strong>Goal:</strong> Signed-off brief + reset timeline agreed</div>
+      </div>
+      <div class="hm-card">
+        <div class="hm-head">
+          <div class="hm-name">Hiring Manager 2</div>
+          <div class="hm-issue silent">No feedback</div>
+        </div>
+        <div class="hm-body">
+          <p>I lead with empathy. She's frustrated, she's busy, and she feels the pipeline has dried up. She needs to feel heard before I walk her through what actually happened.</p>
+          <p>Then I show the data: <strong>two strong candidates accepted other offers while waiting</strong>. Not as an accusation — as evidence of what slow turnaround costs. Most HMs don't see this connection until you show it.</p>
+          <p>I walk her through our communication process — Greenhouse tags, 48-hour SLA — not as a lecture but as a practical guide. And I explore a pragmatic option: is there someone on her team she trusts to give feedback when she can't?</p>
+        </div>
+        <div class="hm-outcome"><strong>Goal:</strong> Feedback loop restored + bi-weekly 15-min syncs agreed</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VP Update -->
+  <div class="block">
+    <div class="section-label">03 — VP Engineering update</div>
+    <div class="block-title">Lead with <em>context, not excuses</em></div>
+
+    <p>The dashboard shows all six active requisitions — full funnel visibility, plus outreach data from LinkedIn Recruiter: messages sent, response rates, conversion at each stage. The numbers look bad on the surface. My job is to give them the story behind the numbers.</p>
+
+    <ul>
+      <li><strong>HM1:</strong> Pipeline reset explained, root cause named, new brief shown, week-one outreach numbers presented. Story: we lost three weeks, we know exactly why, here's what we've done and what the next two weeks look like.</li>
+      <li><strong>HM2:</strong> Funnel drop shown, two lost candidates called out with timeline. Followed immediately by the fix — feedback loop restored, bi-weekly syncs in place. Story: bottleneck identified, addressed, now being measured.</li>
+    </ul>
+
+    <div class="quote-block">
+      <p>"The VP doesn't want to hear about problems. He wants to see that recruiting has situational awareness, takes ownership, and has a plan."</p>
+    </div>
+
+    <p>I close with a two-week forecast per role. Not promises — targets backed by pipeline data. Honest, proactive, and in control of the narrative.</p>
+  </div>
+
+</div>
+
+<!-- ══════════════ TASK 3 ══════════════ -->
+<div id="t3" class="section">
+
+  <div class="task-intro">🤝 Candidate Attraction — Senior PHP Engineer (Evergreen)</div>
+
+  <!-- Inputs -->
+  <div class="block">
+    <div class="section-label">01 — Before anything else</div>
+    <div class="block-title">Why is this role <em>still open?</em></div>
+
+    <p>This is the first question I ask — and the most important one. If a role has been open for a long time, something hasn't worked. I want to understand that before I repeat the same approach.</p>
+
+    <ul>
+      <li>What has been tried before — which channels, which profiles?</li>
+      <li>Who was interviewed and rejected, and why?</li>
+      <li>Has the bar shifted over time, or have offers been declined?</li>
+      <li>Is the problem supply, internal process, or expectations?</li>
+    </ul>
+
+    <p>Only once I understand the history do I build the full intake picture: candidate profile, role scope, team culture, HM style, target companies, related industries.</p>
+
+    <div class="quote-block">
+      <p>"List me the 5 key traits you need. Now — which leg can we remove and still have a fully functional sheep?"</p>
+    </div>
+
+    <p>This question forces prioritisation. A sheep with 5 legs is hard to find. Knowing which 4 are non-negotiable changes everything about how you search.</p>
+  </div>
+
+  <!-- Channels -->
+  <div class="block">
+    <div class="section-label">02 — Sourcing channels</div>
+    <div class="block-title">Where to <em>actually look</em></div>
+
+    <div class="channels">
+      <div class="ch-card">
+        <div class="ch-top">
+          <div class="ch-name">LinkedIn Recruiter</div>
+          <div class="ch-pct">75%</div>
+        </div>
+        <div class="ch-bar-bg"><div class="ch-bar" style="width:75%;background:var(--lime)"></div></div>
+        <div class="ch-note">Still the most active global network. Boolean strings: PHP 8+, PostgreSQL, product teams, Barcelona + EU remote. Note: for LATAM I use local platforms; for Germany, Xing.</div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-top">
+          <div class="ch-name">Referrals</div>
+          <div class="ch-pct">10%</div>
+        </div>
+        <div class="ch-bar-bg"><div class="ch-bar" style="width:10%;background:var(--orange)"></div></div>
+        <div class="ch-note">Consistently the highest quality channel. Referred candidates arrive with context — they've heard the positives and are already engaged. Ask the HM and team for names.</div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-top">
+          <div class="ch-name">GitHub</div>
+          <div class="ch-pct">10%</div>
+        </div>
+        <div class="ch-bar-bg"><div class="ch-bar" style="width:10%;background:var(--blue)"></div></div>
+        <div class="ch-note">Source PHP contributors with strong activity and recent commits. Find them on LinkedIn by name, or reach out via their profile or personal site.</div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-top">
+          <div class="ch-name">Community groups</div>
+          <div class="ch-pct">5%</div>
+        </div>
+        <div class="ch-bar-bg"><div class="ch-bar" style="width:5%;background:var(--purple)"></div></div>
+        <div class="ch-note">PHP Slack channels, Discord, LI groups. Longer play — build credibility before promoting. Good for pipeline over time, not quick wins.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Standout ideas -->
+  <div class="block">
+    <div class="section-label">03 — Two ideas to stand out</div>
+    <div class="block-title">Outreach that <em>actually gets noticed</em></div>
+
+    <div class="ideas">
+      <div class="idea-card">
+        <div class="idea-icon" style="background:rgba(200,241,53,0.15)">📸</div>
+        <div class="idea-title">Hiring manager content</div>
+        <p class="idea-body">Get the HM and team in a photo or short video — casual, on-brand, approachable. Post it. At FLYR I wrote ready-to-post LinkedIn content for the engineering manager so all he had to do was hit publish. A post from the HM reaches a completely different audience than one from recruitment — and candidates respond very differently to it.</p>
+      </div>
+      <div class="idea-card">
+        <div class="idea-icon" style="background:rgba(53,87,255,0.08)">🏆</div>
+        <div class="idea-title">PHP skills competition</div>
+        <p class="idea-body">Run a public PHP challenge via TestGorilla. Top 5 scoring candidates get a fast-track interview or meet-and-greet with the team. Works especially well for remote-eligible roles, generates organic interest in the PHP community, signals that Manychat hires on merit — and creates shareable content around the brand.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Measuring success -->
+  <div class="block">
+    <div class="section-label">04 — Measuring success</div>
+    <div class="block-title">Numbers that <em>actually matter</em></div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th>Target</th><th>Why it matters</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Outreach response rate</td><td>≥65%</td><td>Low response = wrong channel or wrong message</td></tr>
+          <tr><td>Recruiter screen → HM conversion</td><td>≥60%</td><td>If low, intake brief needs revisiting</td></tr>
+          <tr><td>HM → Technical conversion</td><td>≥65%</td><td>If low, HM alignment is the issue</td></tr>
+          <tr><td>Time-to-first qualified candidate</td><td>≤7 days</td><td>Key signal that channel strategy is working</td></tr>
+          <tr><td>Channel quality distribution</td><td>Track weekly</td><td>Reallocate effort if one channel underperforms</td></tr>
+          <tr><td>Evergreen rejection reasons</td><td>Different from before</td><td>Same reasons = root cause not addressed</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>That last metric is the one most people forget on evergreen roles. If we're still seeing the same rejection reasons after four weeks, we haven't solved anything — we've just run the same play again.</p>
+  </div>
+
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-l"><strong>Wouter Jaarsma</strong> · Does Recruitment · Barcelona · doesstartups.com</div>
+  <div class="footer-r">Case study · Senior Recruiter Engineering · April 2026</div>
+</footer>
+
+<script>
+function showTab(id, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
